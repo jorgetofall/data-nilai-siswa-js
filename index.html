@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js for jancok</title>
+    <style>
+        body{
+            font-family:Arial, Helvetica, sans-serif ;
+            background-color: #257180;
+            margin: 0;
+            padding: 20px;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container{
+            background-color:#F2E5BF;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1{
+            text-align: center;
+            color: rgb(0, 0, 0);
+        }
+
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th{
+            color: rgb(0, 0, 0);
+        }
+
+        table, th, td{
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        th,td{
+            padding: 10px;
+            text-align: left;
+        }
+
+        th{
+            background-color: #CB6040;
+        }
+
+        .rata{
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: rgb(30, 53, 54);
+        }
+
+        p{
+            font-weight: bold;
+            color: rgb(8, 91, 95);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Data Nilai Siswa</h1>
+        <table>
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Nilai</th>
+            </tr>
+        </thead>
+        <tbody id="data">
+        </tbody>
+        </table>
+
+        <div class="rata">
+            <p id="total-nilai">Total nilai: </p>
+            <p id="rata-rata">Nilai rata-rata: </p>
+        </div>
+    </div>
+
+    <script>
+        let dataMasbro = [
+            {nama : "Cecep", nilai : 98},
+            {nama : "Aceng", nilai : 88},
+            {nama : "Tatang", nilai : 90},
+            {nama : "Asep", nilai : 54},
+            {nama : "Entis", nilai : 76},
+            {nama : "Aji", nilai : 83},
+            {nama : "Bayu", nilai : 65},
+        ];
+
+        let tbody = document.getElementById("data");
+        let totalNilaiElement = document.getElementById("total-nilai");
+        let rataRataElement = document.getElementById("rata-rata");
+
+        for(let i = 0; i < dataMasbro.length; i++){
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            let td2 = document.createElement("td");
+            td1.innerHTML = dataMasbro[i].nama;
+            td2.innerHTML = dataMasbro[i].nilai;
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tbody.appendChild(tr);
+        }
+
+        function hitungTotalNilai() {
+            let totalNilai = 0;
+
+            dataMasbro.forEach(function(siswa) {
+                totalNilai += siswa.nilai;
+            });
+
+            return totalNilai;
+        }
+
+        function hitungRataRata() {
+            let totalNilai = hitungTotalNilai();
+            let rataRata = totalNilai / dataMasbro.length;
+            rataRataElement.textContent = "Nilai rata-rata: " + rataRata.toFixed(2);
+            totalNilaiElement.textContent = "Total nilai: " + totalNilai;
+        }
+
+        window.onload = function() {
+            hitungRataRata();
+        };
+    </script>
+</body>
+</html>
